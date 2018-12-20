@@ -1,18 +1,42 @@
 \documentclass{article}
+\makeatletter
 \usepackage{geometry}
  \geometry{
- a4paper,
- total={170mm,257mm},
- left=20mm,
- top=20mm,
+ a5paper,
+ left=10mm,
+ top=10mm,
  }
+ 
+% \newcommand{\ssection}[1]{%
+%  \section[#1]{\centering\normalfont\scshape #1}}
+ 
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand*\contentsname{Obsah}
+\renewcommand\numberline[1]{}
 
 \usepackage{leadsheets}
+\definesongtitletemplate{custom}{
+  \ifsongmeasuring
+    {\section*}
+    {\section}{\normalsize %
+    \songproperty{title}%
+    \ifsongproperty{music}
+      { (music by \printsongpropertylist{music}{ \& }{, }{ \& })}
+      {}%
+  }
+}
 
 \begin{document}
+\tableofcontents
+\newpage
+
+\setcounter{secnumdepth}{0} 
+
 \setleadsheets{
+  title-template=custom,
   verse/numbered=true,
-  song-format = { \large }
+  song-format = { \small }
 }
 \setchords{ 
   format={\bfseries \em}
